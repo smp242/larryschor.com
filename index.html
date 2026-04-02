@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Larry Schor, Ph.D. — Licensed Professional Counselor</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --navy: #1a3550;
+      --teal: #2e7d8c;
+      --light: #f4f7f9;
+      --rule: #c8d6e0;
+      --text: #2b2b2b;
+      --muted: #5a6a74;
+    }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── HERO ─────────────────────────────────────────────── */
+    .hero {
+      background: var(--navy);
+      color: #fff;
+      padding: 56px 24px 48px;
+      text-align: center;
+    }
+
+    .hero img.portrait {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 4px solid var(--teal);
+      margin-bottom: 24px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: normal;
+      letter-spacing: .03em;
+      margin-bottom: 6px;
+    }
+
+    .hero .credentials {
+      font-size: 1.05rem;
+      color: #a8c8d8;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    /* ── OFFICE ───────────────────────────────────────────── */
+    .office {
+      background: #fff;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      padding: 40px 24px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .office img.building {
+      width: 320px;
+      max-width: 100%;
+      border-radius: 6px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
+    }
+
+    .office-info {
+      max-width: 340px;
+    }
+
+    .office-info h2 {
+      font-size: 1.1rem;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 10px;
+    }
+
+    .office-info address {
+      font-style: normal;
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--text);
+    }
+
+    .office-info address a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    .office-info address a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── MAIN CONTENT ─────────────────────────────────────── */
+    .content {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+    }
+
+    section {
+      margin-bottom: 44px;
+    }
+
+    section h2 {
+      font-size: 1rem;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      border-bottom: 2px solid var(--rule);
+      padding-bottom: 6px;
+      margin-bottom: 18px;
+    }
+
+    /* Education */
+    table.edu {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .97rem;
+    }
+
+    table.edu td {
+      padding: 5px 8px 5px 0;
+      vertical-align: top;
+    }
+
+    table.edu td:first-child {
+      white-space: nowrap;
+      font-weight: bold;
+      color: var(--navy);
+      width: 3.5em;
+    }
+
+    table.edu td:nth-child(2) {
+      white-space: nowrap;
+      color: var(--muted);
+      width: 3em;
+    }
+
+    table.edu td:nth-child(3) {
+      white-space: nowrap;
+      color: var(--muted);
+      width: 5em;
+    }
+
+    /* Lists */
+    ul.plain {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul.plain li {
+      padding: 4px 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: .97rem;
+    }
+
+    ul.plain li:last-child {
+      border-bottom: none;
+    }
+
+    /* Honors */
+    .honor {
+      margin-bottom: 12px;
+    }
+
+    .honor strong {
+      display: block;
+      color: var(--navy);
+      font-size: .97rem;
+    }
+
+    .honor span {
+      color: var(--muted);
+      font-size: .91rem;
+    }
+
+    /* Clinical experience */
+    .exp-item {
+      margin-bottom: 16px;
+    }
+
+    .exp-item .role {
+      font-weight: bold;
+      color: var(--navy);
+    }
+
+    .exp-item .period {
+      color: var(--muted);
+      font-size: .91rem;
+    }
+
+    .exp-item p {
+      font-size: .95rem;
+      margin-top: 2px;
+    }
+
+    /* Academic */
+    .rank {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: .97rem;
+    }
+
+    .rank:last-child {
+      border-bottom: none;
+    }
+
+    .rank .title {
+      color: var(--navy);
+      font-weight: bold;
+    }
+
+    .rank .years {
+      color: var(--muted);
+      font-size: .91rem;
+    }
+
+    /* Publications */
+    .pub {
+      font-size: .93rem;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .pub:last-child {
+      border-bottom: none;
+    }
+
+    /* Contact */
+    .contact-section {
+      text-align: center;
+      padding: 16px 0 8px;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      background: var(--teal);
+      color: #fff;
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      letter-spacing: .05em;
+      padding: 14px 36px;
+      border-radius: 4px;
+      transition: background .2s;
+    }
+
+    .contact-btn:hover {
+      background: var(--navy);
+    }
+
+    /* ── FOOTER ───────────────────────────────────────────── */
+    footer {
+      background: var(--navy);
+      color: #7a9bb0;
+      text-align: center;
+      font-size: .85rem;
+      padding: 20px 24px;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .office {
+        padding: 28px 16px;
+      }
+
+      .office img.building {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <img class="portrait" src="img/SchorPic.jpg" alt="Larry Schor, Ph.D." />
+    <h1>Larry Schor, Ph.D.</h1>
+    <p class="credentials">Licensed Professional Counselor &nbsp;|&nbsp; Professor Emeritus &nbsp;|&nbsp; Diplomate in
+      Trauma Counseling</p>
+  </header>
+
+  <!-- OFFICE -->
+  <div class="office">
+    <img class="building" src="img/309 Tanner Street.jpg" alt="309 Tanner Street, Carrollton GA" />
+    <div class="office-info">
+      <h2>Private Practice</h2>
+      <address>
+        309 Tanner Street<br />
+        Carrollton, GA 30117<br /><br />
+        Phone: <a href="tel:7703014623">770-301-4623</a><br />
+        Web: <a href="http://www.LarrySchor.com" target="_blank" rel="noopener">www.LarrySchor.com</a>
+      </address>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- Education -->
+    <section>
+      <h2>Education</h2>
+      <table class="edu">
+        <tr>
+          <td>Ph.D.</td>
+          <td>1998</td>
+          <td>Auburn University</td>
+          <td>Counselor Education and Supervision</td>
+        </tr>
+        <tr>
+          <td>Ed.S.</td>
+          <td>1991</td>
+          <td>University of West Georgia</td>
+          <td>Guidance and Counseling</td>
+        </tr>
+        <tr>
+          <td>M.A.</td>
+          <td>1989</td>
+          <td>University of West Georgia</td>
+          <td>Psychology</td>
+        </tr>
+        <tr>
+          <td>B.A.</td>
+          <td>1983</td>
+          <td>University of Miami</td>
+          <td>Psychology</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- Licensure & Certifications -->
+    <section>
+      <h2>Licensure &amp; Certification</h2>
+      <ul class="plain">
+        <li>Licensed Professional Counselor, GA #01930 (1994–present)</li>
+        <li>Diplomate in Trauma Counseling, American Mental Health Counselors Association (2018–present)</li>
+        <li>American Red Cross Certified Disaster Mental Health Counselor / Supervisor (1997–2022)</li>
+      </ul>
+    </section>
+
+    <!-- Professional Memberships -->
+    <section>
+      <h2>Professional Memberships</h2>
+      <ul class="plain">
+        <li>American Academy of Psychotherapists — Lifetime Member (2001–present)</li>
+        <li>Licensed Professional Counselors Association of Georgia — Clinical Member &amp; Founding Member
+          (1993–present)</li>
+        <li>American Headache Society</li>
+      </ul>
+    </section>
+
+    <!-- Selected Honors -->
+    <section>
+      <h2>Selected Honors</h2>
+      <div class="honor"><strong>Alumni Achievement Award — College of Social Sciences (2020)</strong><span>University
+          of West Georgia</span></div>
+      <div class="honor"><strong>Georgia Counselor Educator of the Year (2019)</strong><span>Licensed Professional
+          Counselors Association of Georgia</span></div>
+      <div class="honor"><strong>Cluster Headache International Advocacy Award
+          (2019)</strong><span>ClusterBusters</span></div>
+      <div class="honor"><strong>Georgia Counselor of the Year (2004)</strong><span>Licensed Professional Counselors
+          Association of Georgia</span></div>
+    </section>
+
+    <!-- Clinical Experience -->
+    <section>
+      <h2>Clinical Experience</h2>
+      <div class="exp-item">
+        <span class="role">Counselor in Private Practice</span> &mdash; <span class="period">1993–present, Carrollton,
+          GA</span>
+        <p>Individual, marital, and family psychotherapy; clinical supervision; crisis intervention; hospital and school
+          consultation; mediation.</p>
+      </div>
+      <div class="exp-item">
+        <span class="role">Counselor Supervisor</span> &mdash; <span class="period">1997–2024, Carrollton, GA</span>
+        <p>Individual and group clinical supervision for counselor trainees.</p>
+      </div>
+      <div class="exp-item">
+        <span class="role">Primary Therapist</span> &mdash; <span class="period">1991–1993, Murphy-Harpst-Vashti Center,
+          Cedartown, GA</span>
+        <p>Assessment, treatment planning, individual, group, and family psychotherapy in a residential setting for
+          severely emotionally disturbed children and adolescents.</p>
+      </div>
+      <div class="exp-item">
+        <span class="role">Outpatient Coordinator</span> &mdash; <span class="period">1988–1991, Gateway — A Center for
+          the Treatment of Addictive Illness, Carrollton, GA</span>
+        <p>Assessment, individual &amp; group psychotherapy, program development.</p>
+      </div>
+    </section>
+
+    <!-- Academic Appointments -->
+    <section>
+      <h2>Academic Appointments</h2>
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:12px;">University of West Georgia — Department of
+        Psychology</p>
+      <div class="rank"><span class="title">Professor Emeritus</span><span class="years">2022–present</span></div>
+      <div class="rank"><span class="title">Professor</span><span class="years">2014–2021</span></div>
+      <div class="rank"><span class="title">Associate Professor</span><span class="years">2004–2014</span></div>
+      <div class="rank"><span class="title">Assistant Professor</span><span class="years">1998–2004</span></div>
+      <div class="rank"><span class="title">Coordinator of Therapeutic Services</span><span
+          class="years">1999–2009</span></div>
+      <div class="rank"><span class="title">Instructor</span><span class="years">1992–2004</span></div>
+    </section>
+
+    <!-- Selected Publications -->
+    <section>
+      <h2>Selected Publications</h2>
+      <div class="pub">Schor LI, et al. The location of pain in cluster headache: Data from the International Cluster
+        Headache Questionnaire. <em>Headache.</em> 2024.</div>
+      <div class="pub">Schor LI, et al. Cluster headache epidemiology including pediatric onset, sex, and ICHD criteria.
+        <em>Headache.</em> 2021.</div>
+      <div class="pub">Burish MJ, Pearson SM, Shapiro RE, Zhang W, Schor LI. Cluster headache is one of the most
+        intensely painful human conditions. <em>Headache.</em> 2020.</div>
+      <div class="pub">Schor, L. (2013). Leaps of faith: A therapy tale twice told. <em>Voices: The Art and Science of
+          Psychotherapy,</em> 49(2).</div>
+      <div class="pub">Schor, L. I. (2009). Dissociative Identity Disorder: Too much for one soul to bear?
+        <em>Voices,</em> 44(2). (Invited author)</div>
+      <div class="pub">Schor, L. I. (1999). Brief humanistic and existential therapy. In <em>Brief Interventions and
+          Brief Therapies for Substance Abuse.</em> SAMHSA Treatment Improvement Protocol Series, Vol. 34.</div>
+      <div class="pub">Compton, M. T., Cibulas, B. K., … Schor, L., et al. (2005). Incorporating community mental health
+        into local bioterrorism planning. <em>Community Mental Health Journal,</em> 41(6).</div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section">
+      <h2 style="text-align:center;border:none;margin-bottom:20px;">Contact</h2>
+      <a class="contact-btn" href="mailto:carrolltoncounseling@gmail.com">Email Dr. Schor</a>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Lawrence I. Schor, Ph.D. &nbsp;&mdash;&nbsp; 309 Tanner Street, Carrollton, GA 30117
+  </footer>
+
+</body>
+
+</html>
