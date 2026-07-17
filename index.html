@@ -112,6 +112,64 @@
       text-decoration: underline;
     }
 
+    .office-info .contact-btn {
+      display: inline-block;
+      margin-top: 14px;
+      background: var(--teal);
+      color: #fff;
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-size: .95rem;
+      letter-spacing: .05em;
+      padding: 12px 30px;
+      border-radius: 4px;
+      transition: background .2s;
+    }
+
+    .office-info .contact-btn:hover {
+      background: var(--navy);
+    }
+
+    /* ── TABS ─────────────────────────────────────────────── */
+    .tab-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #fff;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 4px;
+      padding: 0 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .04);
+    }
+
+    .tab-nav button {
+      appearance: none;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      font-size: .82rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 16px 14px;
+      transition: color .2s, border-color .2s;
+    }
+
+    .tab-nav button:hover {
+      color: var(--navy);
+    }
+
+    .tab-nav button[aria-selected="true"] {
+      color: var(--navy);
+      border-bottom-color: var(--teal);
+      font-weight: bold;
+    }
+
     /* ── MAIN CONTENT ─────────────────────────────────────── */
     .content {
       max-width: 860px;
@@ -119,8 +177,33 @@
       padding: 48px 24px 64px;
     }
 
+    .tab-panel {
+      display: none;
+    }
+
+    .tab-panel.active {
+      display: block;
+      animation: fade .25s ease;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
     section {
       margin-bottom: 44px;
+    }
+
+    section:last-child {
+      margin-bottom: 0;
     }
 
     section h2 {
@@ -131,6 +214,15 @@
       border-bottom: 2px solid var(--rule);
       padding-bottom: 6px;
       margin-bottom: 18px;
+    }
+
+    .year-head {
+      font-family: Arial, sans-serif;
+      font-size: .8rem;
+      font-weight: bold;
+      letter-spacing: .1em;
+      color: var(--teal);
+      margin: 22px 0 8px;
     }
 
     /* Education */
@@ -240,10 +332,10 @@
       font-size: .91rem;
     }
 
-    /* Publications */
+    /* Publications / presentations / entries */
     .pub {
       font-size: .93rem;
-      padding: 6px 0;
+      padding: 8px 0;
       border-bottom: 1px solid var(--rule);
     }
 
@@ -251,27 +343,51 @@
       border-bottom: none;
     }
 
-    /* Contact */
-    .contact-section {
-      text-align: center;
-      padding: 16px 0 8px;
+    .pub a {
+      color: var(--teal);
+      word-break: break-word;
     }
 
-    .contact-btn {
-      display: inline-block;
-      background: var(--teal);
-      color: #fff;
-      text-decoration: none;
-      font-family: Arial, sans-serif;
-      font-size: 1rem;
-      letter-spacing: .05em;
-      padding: 14px 36px;
-      border-radius: 4px;
-      transition: background .2s;
+    /* Consultation entries */
+    .entry {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--rule);
     }
 
-    .contact-btn:hover {
-      background: var(--navy);
+    .entry:last-child {
+      border-bottom: none;
+    }
+
+    .entry .entry-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .entry .entry-title {
+      font-weight: bold;
+      color: var(--navy);
+      font-size: .96rem;
+    }
+
+    .entry .entry-date {
+      color: var(--muted);
+      font-size: .88rem;
+      white-space: nowrap;
+    }
+
+    .entry p {
+      font-size: .92rem;
+      color: var(--text);
+      margin-top: 2px;
+    }
+
+    .intro {
+      font-size: .95rem;
+      color: var(--muted);
+      margin-bottom: 8px;
     }
 
     /* ── FOOTER ───────────────────────────────────────────── */
@@ -295,6 +411,15 @@
       .office img.building {
         width: 100%;
       }
+
+      .tab-nav button {
+        padding: 13px 10px;
+        font-size: .76rem;
+      }
+
+      .content {
+        padding: 32px 18px 48px;
+      }
     }
   </style>
 </head>
@@ -305,11 +430,10 @@
   <header class="hero">
     <img class="portrait" src="img/SchorPic.jpg" alt="Larry Schor, Ph.D." />
     <h1>Larry Schor, Ph.D.</h1>
-    <p class="credentials">Licensed Professional Counselor &nbsp;|&nbsp; Professor Emeritus &nbsp;|&nbsp; Diplomate in
-      Trauma Counseling</p>
+    <p class="credentials">Licensed Professional Counselor &nbsp;|&nbsp; Professor Emeritus</p>
   </header>
 
-  <!-- OFFICE -->
+  <!-- OFFICE / CONTACT -->
   <div class="office">
     <img class="building" src="img/309 Tanner Street.jpg" alt="309 Tanner Street, Carrollton GA" />
     <div class="office-info">
@@ -320,147 +444,482 @@
         Phone: <a href="tel:7703014623">770-301-4623</a><br />
         Web: <a href="http://www.LarrySchor.com" target="_blank" rel="noopener">www.LarrySchor.com</a>
       </address>
+      <a class="contact-btn" href="mailto:carrolltoncounseling@gmail.com">Email Dr. Schor</a>
     </div>
   </div>
+
+  <!-- TAB NAV -->
+  <nav class="tab-nav" role="tablist" aria-label="Sections">
+    <button role="tab" id="tab-about" aria-controls="panel-about" aria-selected="true">About</button>
+    <button role="tab" id="tab-experience" aria-controls="panel-experience" aria-selected="false">Experience</button>
+    <button role="tab" id="tab-publications" aria-controls="panel-publications" aria-selected="false">Publications</button>
+    <button role="tab" id="tab-presentations" aria-controls="panel-presentations" aria-selected="false">Presentations</button>
+    <button role="tab" id="tab-consultation" aria-controls="panel-consultation" aria-selected="false">Consultation &amp; Service</button>
+  </nav>
 
   <!-- MAIN CONTENT -->
   <main class="content">
 
-    <!-- Education -->
-    <section>
-      <h2>Education</h2>
-      <table class="edu">
-        <tr>
-          <td>Ph.D.</td>
-          <td>1998</td>
-          <td>Auburn University</td>
-          <td>Counselor Education and Supervision</td>
-        </tr>
-        <tr>
-          <td>Ed.S.</td>
-          <td>1991</td>
-          <td>University of West Georgia</td>
-          <td>Guidance and Counseling</td>
-        </tr>
-        <tr>
-          <td>M.A.</td>
-          <td>1989</td>
-          <td>University of West Georgia</td>
-          <td>Psychology</td>
-        </tr>
-        <tr>
-          <td>B.A.</td>
-          <td>1983</td>
-          <td>University of Miami</td>
-          <td>Psychology</td>
-        </tr>
-      </table>
-    </section>
+    <!-- ══════════ ABOUT ══════════ -->
+    <div class="tab-panel active" id="panel-about" role="tabpanel" aria-labelledby="tab-about">
 
-    <!-- Licensure & Certifications -->
-    <section>
-      <h2>Licensure &amp; Certification</h2>
-      <ul class="plain">
-        <li>Licensed Professional Counselor, GA #01930 (1994–present)</li>
-        <li>Diplomate in Trauma Counseling, American Mental Health Counselors Association (2018–present)</li>
-        <li>American Red Cross Certified Disaster Mental Health Counselor / Supervisor (1997–2022)</li>
-      </ul>
-    </section>
+      <section>
+        <h2>Education</h2>
+        <table class="edu">
+          <tr>
+            <td>Ph.D.</td>
+            <td>1998</td>
+            <td>Auburn University</td>
+            <td>Counselor Education and Supervision</td>
+          </tr>
+          <tr>
+            <td>Ed.S.</td>
+            <td>1991</td>
+            <td>University of West Georgia</td>
+            <td>Guidance and Counseling</td>
+          </tr>
+          <tr>
+            <td>M.A.</td>
+            <td>1989</td>
+            <td>University of West Georgia</td>
+            <td>Psychology</td>
+          </tr>
+          <tr>
+            <td>B.A.</td>
+            <td>1983</td>
+            <td>University of Miami</td>
+            <td>Psychology</td>
+          </tr>
+        </table>
+      </section>
 
-    <!-- Professional Memberships -->
-    <section>
-      <h2>Professional Memberships</h2>
-      <ul class="plain">
-        <li>American Academy of Psychotherapists — Lifetime Member (2001–present)</li>
-        <li>Licensed Professional Counselors Association of Georgia — Clinical Member &amp; Founding Member
-          (1993–present)</li>
-        <li>American Headache Society</li>
-      </ul>
-    </section>
+      <section>
+        <h2>Licensure &amp; Certification</h2>
+        <ul class="plain">
+          <li>Licensed Professional Counselor, GA #01930 (1994–present)</li>
+          <li>Diplomate in Trauma Counseling, American Mental Health Counselors Association (2018–present)</li>
+          <li>American Red Cross Certified Disaster Mental Health Counselor / Supervisor (1997–2022)</li>
+        </ul>
+      </section>
 
-    <!-- Selected Honors -->
-    <section>
-      <h2>Selected Honors</h2>
-      <div class="honor"><strong>Alumni Achievement Award — College of Social Sciences (2020)</strong><span>University
-          of West Georgia</span></div>
-      <div class="honor"><strong>Georgia Counselor Educator of the Year (2019)</strong><span>Licensed Professional
-          Counselors Association of Georgia</span></div>
-      <div class="honor"><strong>Cluster Headache International Advocacy Award
-          (2019)</strong><span>ClusterBusters</span></div>
-      <div class="honor"><strong>Georgia Counselor of the Year (2004)</strong><span>Licensed Professional Counselors
-          Association of Georgia</span></div>
-    </section>
+      <section>
+        <h2>Professional Memberships</h2>
+        <ul class="plain">
+          <li>American Academy of Psychotherapists — Lifetime Member (2001–present)</li>
+          <li>Licensed Professional Counselors Association of Georgia — Clinical Member &amp; Founding Member
+            (1993–present)</li>
+          <li>American Headache Society</li>
+        </ul>
+      </section>
 
-    <!-- Clinical Experience -->
-    <section>
-      <h2>Clinical Experience</h2>
-      <div class="exp-item">
-        <span class="role">Counselor in Private Practice</span> &mdash; <span class="period">1993–present, Carrollton,
-          GA</span>
-        <p>Individual, marital, and family psychotherapy; clinical supervision; crisis intervention; hospital and school
-          consultation; mediation.</p>
-      </div>
-      <div class="exp-item">
-        <span class="role">Counselor Supervisor</span> &mdash; <span class="period">1997–2024, Carrollton, GA</span>
-        <p>Individual and group clinical supervision for counselor trainees.</p>
-      </div>
-      <div class="exp-item">
-        <span class="role">Primary Therapist</span> &mdash; <span class="period">1991–1993, Murphy-Harpst-Vashti Center,
-          Cedartown, GA</span>
-        <p>Assessment, treatment planning, individual, group, and family psychotherapy in a residential setting for
-          severely emotionally disturbed children and adolescents.</p>
-      </div>
-      <div class="exp-item">
-        <span class="role">Outpatient Coordinator</span> &mdash; <span class="period">1988–1991, Gateway — A Center for
-          the Treatment of Addictive Illness, Carrollton, GA</span>
-        <p>Assessment, individual &amp; group psychotherapy, program development.</p>
-      </div>
-    </section>
+      <section>
+        <h2>Selected Honors</h2>
+        <div class="honor"><strong>Alumni Achievement Award — College of Social Sciences (2020)</strong><span>University
+            of West Georgia</span></div>
+        <div class="honor"><strong>Georgia Counselor Educator of the Year (2019)</strong><span>Licensed Professional
+            Counselors Association of Georgia</span></div>
+        <div class="honor"><strong>Cluster Headache International Advocacy Award
+            (2019)</strong><span>ClusterBusters</span></div>
+        <div class="honor"><strong>Georgia Counselor of the Year (2004)</strong><span>Licensed Professional Counselors
+            Association of Georgia</span></div>
+      </section>
 
-    <!-- Academic Appointments -->
-    <section>
-      <h2>Academic Appointments</h2>
-      <p style="color:var(--muted);font-size:.9rem;margin-bottom:12px;">University of West Georgia — Department of
-        Psychology</p>
-      <div class="rank"><span class="title">Professor Emeritus</span><span class="years">2022–present</span></div>
-      <div class="rank"><span class="title">Professor</span><span class="years">2014–2021</span></div>
-      <div class="rank"><span class="title">Associate Professor</span><span class="years">2004–2014</span></div>
-      <div class="rank"><span class="title">Assistant Professor</span><span class="years">1998–2004</span></div>
-      <div class="rank"><span class="title">Coordinator of Therapeutic Services</span><span
-          class="years">1999–2009</span></div>
-      <div class="rank"><span class="title">Instructor</span><span class="years">1992–2004</span></div>
-    </section>
+    </div>
 
-    <!-- Selected Publications -->
-    <section>
-      <h2>Selected Publications</h2>
-      <div class="pub">Schor LI, et al. The location of pain in cluster headache: Data from the International Cluster
-        Headache Questionnaire. <em>Headache.</em> 2024.</div>
-      <div class="pub">Schor LI, et al. Cluster headache epidemiology including pediatric onset, sex, and ICHD criteria.
-        <em>Headache.</em> 2021.</div>
-      <div class="pub">Burish MJ, Pearson SM, Shapiro RE, Zhang W, Schor LI. Cluster headache is one of the most
-        intensely painful human conditions. <em>Headache.</em> 2020.</div>
-      <div class="pub">Schor, L. (2013). Leaps of faith: A therapy tale twice told. <em>Voices: The Art and Science of
-          Psychotherapy,</em> 49(2).</div>
-      <div class="pub">Schor, L. I. (2009). Dissociative Identity Disorder: Too much for one soul to bear?
-        <em>Voices,</em> 44(2). (Invited author)</div>
-      <div class="pub">Schor, L. I. (1999). Brief humanistic and existential therapy. In <em>Brief Interventions and
-          Brief Therapies for Substance Abuse.</em> SAMHSA Treatment Improvement Protocol Series, Vol. 34.</div>
-      <div class="pub">Compton, M. T., Cibulas, B. K., … Schor, L., et al. (2005). Incorporating community mental health
-        into local bioterrorism planning. <em>Community Mental Health Journal,</em> 41(6).</div>
-    </section>
+    <!-- ══════════ EXPERIENCE ══════════ -->
+    <div class="tab-panel" id="panel-experience" role="tabpanel" aria-labelledby="tab-experience">
 
-    <!-- Contact -->
-    <section class="contact-section">
-      <h2 style="text-align:center;border:none;margin-bottom:20px;">Contact</h2>
-      <a class="contact-btn" href="mailto:carrolltoncounseling@gmail.com">Email Dr. Schor</a>
-    </section>
+      <section>
+        <h2>Clinical Experience</h2>
+        <div class="exp-item">
+          <span class="role">Counselor in Private Practice</span> &mdash; <span class="period">1993–present, Carrollton,
+            GA</span>
+          <p>Individual, marital, and family psychotherapy; clinical supervision; crisis intervention; hospital and
+            school consultation; mediation.</p>
+        </div>
+        <div class="exp-item">
+          <span class="role">Counselor Supervisor</span> &mdash; <span class="period">1997–2024, Carrollton, GA</span>
+          <p>Individual and group clinical supervision for counselor trainees.</p>
+        </div>
+        <div class="exp-item">
+          <span class="role">Primary Therapist</span> &mdash; <span class="period">1991–1993, Murphy-Harpst-Vashti
+            Center, Cedartown, GA</span>
+          <p>Assessment, treatment planning, individual, group, and family psychotherapy in a residential setting for
+            severely emotionally disturbed children and adolescents.</p>
+        </div>
+        <div class="exp-item">
+          <span class="role">Outpatient Coordinator</span> &mdash; <span class="period">1988–1991, Gateway — A Center for
+            the Treatment of Addictive Illness, Carrollton, GA</span>
+          <p>Assessment, individual &amp; group psychotherapy, program development.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Academic Appointments</h2>
+        <p class="intro">University of West Georgia — Department of Psychology</p>
+        <div class="rank"><span class="title">Professor Emeritus</span><span class="years">2022–present</span></div>
+        <div class="rank"><span class="title">Professor</span><span class="years">2014–2021</span></div>
+        <div class="rank"><span class="title">Associate Professor</span><span class="years">2004–2014</span></div>
+        <div class="rank"><span class="title">Assistant Professor</span><span class="years">1998–2004</span></div>
+        <div class="rank"><span class="title">Coordinator of Therapeutic Services</span><span
+            class="years">1999–2009</span></div>
+        <div class="rank"><span class="title">Instructor</span><span class="years">1992–2004</span></div>
+      </section>
+
+    </div>
+
+    <!-- ══════════ PUBLICATIONS ══════════ -->
+    <div class="tab-panel" id="panel-publications" role="tabpanel" aria-labelledby="tab-publications">
+      <section>
+        <h2>Publications</h2>
+
+        <div class="pub">Schor LI, Pearson SM, Ettore U, Yuxuan G, Shapiro RE, Kaas JH, Burish MJ. The location of pain in
+          cluster headache: Data from the International Cluster Headache Questionnaire. <em>Headache.</em> 2024.</div>
+        <div class="pub">Schor LI, Pearson SM, Shapiro RE, Zhang W, Miao H, Burish MJ. Cluster headache epidemiology
+          including pediatric onset, sex, and ICHD criteria: Results from the International Cluster Headache
+          Questionnaire. <em>Headache.</em> 2021.</div>
+        <div class="pub">Parakramaweera R, Evans RW, Schor LI, Pearson SM, Martinez R, Cammarata JS, Amin AJ, Yoo SH,
+          Zhang W, Yan Y, Burish MJ. A brief diagnostic screen for cluster headache: Creation and initial validation of
+          the Erwin Test for Cluster Headache. <em>Cephalalgia,</em> 2021; 41(13): 1298–1309.</div>
+        <div class="pub">Burish MJ, Pearson SM, Shapiro RE, Zhang W, Schor LI. Oxygen as the optimal acute medication for
+          cluster headache: A comment and additional validation step from the Cluster Headache Questionnaire.
+          <em>Headache.</em> 2020.</div>
+        <div class="pub">Burish MJ, Pearson SM, Shapiro RE, Zhang W, Schor LI. Cluster headache is one of the most
+          intensely painful human conditions: Results from the International Cluster Headache Questionnaire.
+          <em>Headache.</em> 2020; 61(1): 117–124.</div>
+        <div class="pub">Schor, L. (2020). Georgia Disaster Mental Health (comprehensive public website). Georgia
+          Department of Behavioral Health &amp; Developmental Disabilities.</div>
+        <div class="pub">Pearson SM, Burish MJ, Shapiro RE, Yan Y, Schor LI. Effectiveness of oxygen and other acute
+          treatments for cluster headache: Results from the Cluster Headache Questionnaire, an international survey.
+          <em>Headache.</em> 2019.</div>
+        <div class="pub">Schor LI. Cluster headache: Investigating severity of pain, suicidality, personal burden, access
+          to effective treatment, and demographics among a large international survey sample. <em>Cephalalgia,</em> 2017;
+          37(2S): 172.</div>
+        <div class="pub">Schor, L. I. (2013). Leaps of faith: A therapy tale twice told. <em>Voices: The Art and Science
+            of Psychotherapy,</em> 49(2), 47–57.</div>
+        <div class="pub">Schor, L. I., Shapiro, R., &amp; Wold, R. (2012). Cluster headache and suicide. Fact sheet
+          developed for the National Suicide Prevention Lifeline (1-800-273-TALK).</div>
+        <div class="pub">Schor, L. I. (2009). Dissociative Identity Disorder: Too much for one soul to bear?
+          <em>Voices,</em> 44(2), 28–33. (Invited author)</div>
+        <div class="pub">Schor, L. I. (2008). The heart and soul of the therapist: Rage, fear, desire, loss, and love in
+          the psychotherapy relationship [Foreword]. Washington, D.C.</div>
+        <div class="pub">Schor, L. I. (2007). A life's work, maybe more. <em>MAPS Bulletin,</em> 17(3), 18–19.</div>
+        <div class="pub">Schor, L. I., &amp; Arons, M. (2007). Tribute to Duncan Blewett. <em>Journal of Humanistic
+            Psychology,</em> 47(4), 541–543.</div>
+        <div class="pub">Schor, L. I. (2006). Red suede pillow: An allegory of suffering and healing. <em>Voices,</em>
+          38(3).</div>
+        <div class="pub">Compton, M. T., Cibulas, B. K., Gard, B., Kaslow, N. J., Kotwicki, R. J., Reissman, D. B., Schor,
+          L., &amp; Wetterhall, S. (2005). Incorporating community mental health into local bioterrorism planning.
+          <em>Community Mental Health Journal,</em> 41(6), 647–663.</div>
+        <div class="pub">Schor, L. I. (2004). Apperception as a primary process of the psyche: Implications for theory
+          and practice. <em>The Journal of Psychological Practice,</em> 10(1), 60–72.</div>
+        <div class="pub">Schor, L. I. (2003). A person-centered approach to the use of projectives. <em>The
+            Person-Centered Journal,</em> 10, 39–48.</div>
+        <div class="pub">Schor, L. I. (2002). What help have I to give? A therapist's journey to ground zero.
+          <em>Voices,</em> 38(3).</div>
+        <div class="pub">Schor, L. I. (2002). What is normal? <em>Georgia Psychologist,</em> 56(2).</div>
+        <div class="pub">Schor, L. I. (2001). Coming back to life: A long-term therapy group with survivors of in-school
+          suicide. <em>Voices,</em> 37, 63–74.</div>
+        <div class="pub">Schor, L. I. (2000). Invitations to dialogue: The legacy of Sydney M. Jourard [Book review].
+          <em>Somatics,</em> 13(3), 55.</div>
+        <div class="pub">Schor, L. I. (1999). Brief humanistic and existential therapy. In K. L. Barry et al. (Eds.),
+          <em>Brief Interventions and Brief Therapies for Substance Abuse</em> (pp. 105–119). SAMHSA Treatment
+          Improvement Protocol Series, Vol. 34. Rockville, MD: U.S. Department of Health and Human Services.</div>
+        <div class="pub">Schor, L. I. (1994). AIDS attitudes: A pilot study. <em>Georgia Journal of Mental Health
+            Counseling,</em> 2, 51–60.</div>
+      </section>
+    </div>
+
+    <!-- ══════════ PRESENTATIONS ══════════ -->
+    <div class="tab-panel" id="panel-presentations" role="tabpanel" aria-labelledby="tab-presentations">
+      <section>
+        <h2>Conference Presentations &amp; Workshops</h2>
+
+        <div class="pub">Psychedelics and Therapy: High Time We Get Educated. Workshop, Licensed Professional Counselors
+          Association of Georgia, Atlanta, GA. (2024)</div>
+        <div class="pub">Living with Cluster Headache. Psychotherapy group, ClusterBusters cluster headache research
+          conference, Chicago, IL. (2022)</div>
+        <div class="pub">Complexity and Challenges of Supervision: Legal, Moral, and Ethical Challenges. Licensed
+          Professional Counselors Association of Georgia (virtual). (2021)</div>
+        <div class="pub">Cluster Headache Questionnaire: Updated results from a large international study. ClusterBusters
+          annual meeting (virtual). (2020)</div>
+        <div class="pub">Mental Health, Suicide, and Cluster Headache: Living with excruciating pain. ClusterBusters
+          annual meeting, Denver, CO. (2019)</div>
+        <div class="pub">Living with Cluster Headache. Psychotherapy group, ClusterBusters cluster headache research
+          conference, Dallas, TX. (2019)</div>
+        <div class="pub">The Truths We Can Afford to Tell: Listening to the unspoken. Workshop, annual institute and
+          conference of the American Academy of Psychotherapists, Atlanta, GA. (2018)</div>
+        <div class="pub">Cluster Headache Questionnaire: Preliminary results from a large international study.
+          Presentation and poster session, annual Neurology and Mental Health Conference, Bangkok, Thailand (presented
+          remotely). (2018)</div>
+        <div class="pub">Cluster Headache Questionnaire: Preliminary results from a large international study. UWG Social
+          Sciences conference, Carrollton, GA. (2018)</div>
+        <div class="pub">Cluster Headache Questionnaire: Preliminary results from a large international study.
+          ClusterBusters annual meeting, Denver, CO. (2018)</div>
+        <div class="pub">Ethics in Supervision. Workshop, Licensed Professional Counselors Association of Georgia, Newnan,
+          GA. (2018)</div>
+        <div class="pub">Cluster Headache: Investigating severity of pain, suicidality, personal burden, access to
+          effective treatment, and demographics among a large international survey sample. Poster session, annual
+          International Headache Society conference, Vancouver, Canada. (Abstract of Distinction Award). (2017)</div>
+        <div class="pub">Cluster Headache: An International Study &amp; Living with Cluster Headache (psychotherapy group).
+          ClusterBusters cluster headache research conference, Austin, TX. (2016)</div>
+        <div class="pub">Ethics in Supervision: We're gonna need a bigger compass. Workshop, Licensed Professional
+          Counselors Association of Georgia, Stone Mountain, GA. (2016)</div>
+        <div class="pub">Cluster Headache: Psychological aspects &amp; Living with Cluster Headache (psychotherapy group).
+          ClusterBusters cluster headache research conference, Chicago, IL. (2015)</div>
+        <div class="pub">Disaster Mental Health: What you should know. Emergency Management Association of Georgia
+          conference, Savannah, GA. (2015)</div>
+        <div class="pub">Post-Traumatic Stress Disorder and Secondary Trauma. Training for the Georgia Peace Officer
+          Crisis Intervention Team, Carrollton, GA. (2014)</div>
+        <div class="pub">Beyond Our Reach or Within Our Grasp: Boundaries; their role in enhancing virtue, managing our
+          inner saboteurs, and creating change for good. Invited talk, American Academy of Psychotherapists Winter Salon,
+          Atlanta, GA. (2014)</div>
+        <div class="pub">Psychological First Aid. Emergency Preparedness Workshop (Georgia Department of Public Health,
+          Emory University, and the CDC), Macon, GA. (2013)</div>
+        <div class="pub">Psychological Aspects of Cluster Headache &amp; Living with Cluster Headache (psychotherapy
+          group). ClusterBusters cluster headache research conference, Chicago, IL. (2013)</div>
+        <div class="pub">Alternatives in Supervision: Experiential Presence in the Practice of Clinical Supervision (with
+          P. Foster). Workshop, annual institute and conference of the American Academy of Psychotherapists, Atlanta, GA.
+          (2012)</div>
+        <div class="pub">Alternatives in Supervision: A Call for Depth in Clinical Supervision (with P. Foster). Workshop,
+          Licensed Professional Counselors Association of Georgia, Atlanta, GA. (2012)</div>
+        <div class="pub">Coping with Cluster Headache &amp; Living with Cluster Headache (psychotherapy group).
+          ClusterBusters cluster headache research conference, Chicago, IL. (2011)</div>
+        <div class="pub">The Psychological Impact of Cluster Headache. Organization for Understanding Cluster Headache
+          research conference, Atlanta, GA. (2011)</div>
+        <div class="pub">Disaster Mental Health: What you should know and what you can do. Workshop, Licensed Professional
+          Counselors Association of Georgia, Atlanta, GA. (2010)</div>
+        <div class="pub">Seeds of Change, Sands of Time, Drums of War: Recognizing change within us, between us, and around
+          us. Workshop, annual institute and conference of the American Academy of Psychotherapists, Savannah, GA.
+          (2008)</div>
+        <div class="pub">Psychological Impact of Cluster Headache Pain (Chair; with J. Halpern, T. Passie, &amp; K.
+          Lazarus). Invited symposium, ClusterBusters cluster headache research conference, Atlanta, GA. (2008)</div>
+        <div class="pub">The Biopsychosocial Treatment of Psychiatric Illness. Training for the Georgia Peace Officer
+          Crisis Intervention Team, Carrollton, GA. (2008)</div>
+        <div class="pub">Experiential Group Therapy: Working in the here and now (with E. K. Turner). Workshop, Licensed
+          Professional Counselors Association of Georgia, Stone Mountain, GA. (2008)</div>
+        <div class="pub">Ethical Process in a Context of Chaos: Life in psychotherapy (with L. Schwartzburd). Workshop,
+          annual institute and conference of the American Academy of Psychotherapists, Asheville, NC. (2006)</div>
+        <div class="pub">From Archetype to Enantiodromia: An introduction to Jung. Workshop, Licensed Professional
+          Counselors Association of Georgia, West Point, GA. (2006)</div>
+        <div class="pub">Addiction: Connection, disconnection, and relationships. Workshop, American Academy of
+          Psychotherapists, Balsam Mountain, NC. (2006)</div>
+        <div class="pub">Apperception and the Lived World: Representation and praxis (with M. A. Tissaw, L. Osbeck, &amp;
+          J. M. Good). In L. Osbeck (Chair), Revisiting Representation and Its Discontents. Symposium, annual conference
+          of the American Psychological Association, Washington, D.C. (2005)</div>
+        <div class="pub">Art Stimulus Apperceptive Response Technique. Workshop, Licensed Professional Counselors
+          Association of Georgia, Peachtree City, GA. (2005)</div>
+        <div class="pub">Bridges, Walls, Doors, and Windows: Boundaries of separation and connection. Workshop, American
+          Academy of Psychotherapists, Pawley's Island, SC. (2005)</div>
+        <div class="pub">Like a Bridge Over Troubled Water? A trauma counseling initiative. Workshop, Licensed
+          Professional Counselors Association of Georgia, Savannah, GA. (2004)</div>
+        <div class="pub">Managing the Minefield of Licensure (with L. Painter). Workshop, Mercer University Statewide
+          Student Fair, Atlanta, GA. (2004)</div>
+        <div class="pub">Disaster Mental Health. Workshop, Licensed Professional Counselors Association of Georgia,
+          Peachtree City, GA. (2003)</div>
+        <div class="pub">Self Help? Analysis of a self-injury message board. Paper, annual conference of the American
+          Association of Suicidology, Bethesda, MD. (2002)</div>
+        <div class="pub">What Remains? Suffering and healing at ground zero. Workshop, Licensed Professional Counselors
+          Association of Georgia, Savannah, GA. (2002)</div>
+        <div class="pub">Art Stimulus Apperceptive Response Technique. Paper, annual conference of the American
+          Psychological Association, San Francisco, CA. (2001)</div>
+        <div class="pub">Bleeding Hearts: Understanding clients who self-injure. Workshop, Licensed Professional Counselors
+          Association of Georgia, Pine Mountain, GA. (2001)</div>
+        <div class="pub">Coming Back to Life: A long-term therapy group with survivors of in-school suicide. Paper, annual
+          conference of the American Psychological Association, Washington, D.C. (2000)</div>
+        <div class="pub">When Friends Kill Themselves: Working with survivors of in-school suicide. Workshop, Licensed
+          Professional Counselors Association of Georgia, Savannah, GA. (2000)</div>
+        <div class="pub">The Art-Stimulus Apperceptive Response Technique: A humanistic approach to the use of projectives
+          in psychotherapy. Workshop, Licensed Professional Counselors Association of Georgia, Jekyll Island, GA.
+          (1999)</div>
+      </section>
+    </div>
+
+    <!-- ══════════ CONSULTATION & SERVICE ══════════ -->
+    <div class="tab-panel" id="panel-consultation" role="tabpanel" aria-labelledby="tab-consultation">
+      <section>
+        <h2>Technical Assistance &amp; Consultation</h2>
+
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">ClusterBusters — Medical Advisory Board</span><span
+              class="entry-date">2012–present</span></div>
+          <p>Medical Advisory Board and subject-matter expert for the largest cluster headache advocacy organization
+            worldwide.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Ad Hoc Reviewer — <em>Cephalalgia</em> (International
+              Headache Society)</span><span class="entry-date">2020</span></div>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Ad Hoc Reviewer — <em>Headache</em> (American Headache
+              Society)</span><span class="entry-date">2020</span></div>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Yale University School of Medicine</span><span
+              class="entry-date">2020</span></div>
+          <p>Consultant / subject-matter expert assisting with recruitment for an FDA-approved cluster headache
+            psilocybin study.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">American Mental Health Counselors Association — National Task
+              Force on Training and Standards</span><span class="entry-date">2019–2020</span></div>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">American Red Cross — Disaster Assistance / Condolence Care
+              Team</span><span class="entry-date">2016–2021</span></div>
+          <p>Providing on-call support to disaster victims.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">American Red Cross — Disaster Assistance from Home
+              (DASH)</span><span class="entry-date">2019</span></div>
+          <p>Providing supervisory support to volunteers deployed in the field.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Alliance for Headache Disorders Advocacy — Headache on the
+              Hill</span><span class="entry-date">2012, 2014–2016, 2018, 2019</span></div>
+          <p>Patient advocate, subject-matter expert, and legislative liaison; met with legislators and staff in
+            Washington, D.C.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Full-Scale Airport Disaster Simulation (Operation Big
+              Bird)</span><span class="entry-date">2015</span></div>
+          <p>Participant / evaluator, Hartsfield-Jackson Airport, Atlanta, GA.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Eli Lilly Pharmaceuticals — Cluster Headache Subject-Matter
+              Expert</span><span class="entry-date">2015</span></div>
+          <p>Consultant (unpaid) collaborating on methodology with scientists and executives in the decision to pursue
+            FDA Phase 3 trials for a Calcitonin Gene-Related Peptide antagonist (Emgality). Eli Lilly Headquarters,
+            Indianapolis, IN.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">SAMHSA — Disaster Technical Assistance Cadre
+              Network</span><span class="entry-date">2014–2021</span></div>
+          <p>Appointed to the SAMHSA Disaster Technical Assistance Cadre Network. SAMHSA National Headquarters,
+            Washington, D.C.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Just Listening: Supporting Veterans</span><span
+              class="entry-date">2013–2018</span></div>
+          <p>Coordinated a support group for student and community veterans with Veterans Heart Georgia, sponsored by the
+            UWG College of Social Sciences.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">American Psychiatric Association — DSM-5 Field
+              Trials</span><span class="entry-date">2011–2012</span></div>
+          <p>Collaborating Investigator: field trials in routine clinical practice.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">American Red Cross — Disaster Mental Health Advisor for
+              Georgia</span><span class="entry-date">2011–2014</span></div>
+          <p>Appointed by the American Red Cross National Headquarters, Washington, D.C.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Disaster Mental Health Consultant / Evaluator</span><span
+              class="entry-date">2009</span></div>
+          <p>Georgia Defense Force / Metro Medical Strike Team, American Red Cross disaster simulation and
+            decontamination drill, Atlanta, GA.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Full-Scale Air Crash Disaster Simulation</span><span
+              class="entry-date">2009</span></div>
+          <p>Participant / evaluator, Hartsfield-Jackson Airport, Atlanta, GA.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Disaster Mental Health Counselor — Hurricane
+              Response</span><span class="entry-date">2008</span></div>
+          <p>American Red Cross Emergency Shelter, Villa Rica, GA. Crisis intervention with hurricane victims.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Disaster Mental Health Counselor — Tornado
+              Response</span><span class="entry-date">2008</span></div>
+          <p>American Red Cross Service Center, Atlanta, GA. Crisis intervention with tornado victims.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Disaster Mental Health Counselor — Comair Flight 5191</span><span
+              class="entry-date">2006</span></div>
+          <p>Hartsfield-Jackson International Airport, Atlanta, GA. Crisis intervention with family members of crash
+            victims.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Disaster Mental Health Counselor — Hurricane Katrina
+              (SAMHSA)</span><span class="entry-date">2006</span></div>
+          <p>SAMHSA Katrina Assistance Project, Baton Rouge, LA. Crisis intervention with hurricane victims living in
+            FEMA trailer parks.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Full-Scale Avian Flu Disaster Simulation</span><span
+              class="entry-date">2006</span></div>
+          <p>Participant / evaluator, Hartsfield-Jackson Airport, Atlanta, GA.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Disaster Mental Health Manager / Supervisor — Hurricane
+              Response</span><span class="entry-date">2005</span></div>
+          <p>American Red Cross Emergency Service Center, Lawrenceville, GA. Crisis intervention with hurricane
+            victims.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Disaster Mental Health Counselor — Hurricane
+              Response</span><span class="entry-date">2005</span></div>
+          <p>American Red Cross Emergency Service Center, Lithia Springs, GA. Crisis intervention with hurricane
+            victims.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Disaster Mental Health Counselor — Hurricane
+              Response</span><span class="entry-date">2004</span></div>
+          <p>American Red Cross Emergency Service Center, Valdosta, GA. Crisis intervention with hurricane victims.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Disaster Mental Health Counselor — Flood Response</span><span
+              class="entry-date">2003</span></div>
+          <p>American Red Cross Emergency Service Center, LaGrange, GA. Crisis intervention with flood victims.</p>
+        </div>
+        <div class="entry">
+          <div class="entry-head"><span class="entry-title">Disaster Mental Health Counselor — September 11
+              (Ground Zero)</span><span class="entry-date">2001</span></div>
+          <p>American Red Cross Respite Center at Ground Zero, New York, NY. Crisis intervention, trauma counseling, and
+            psychological support.</p>
+        </div>
+
+      </section>
+    </div>
 
   </main>
 
   <footer>
     &copy; 2025 Lawrence I. Schor, Ph.D. &nbsp;&mdash;&nbsp; 309 Tanner Street, Carrollton, GA 30117
   </footer>
+
+  <script>
+    (function () {
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab-nav [role="tab"]'));
+
+      function selectTab(tab) {
+        tabs.forEach(function (t) {
+          var selected = t === tab;
+          t.setAttribute('aria-selected', selected ? 'true' : 'false');
+          var panel = document.getElementById(t.getAttribute('aria-controls'));
+          panel.classList.toggle('active', selected);
+        });
+      }
+
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener('click', function () {
+          selectTab(tab);
+        });
+        tab.addEventListener('keydown', function (e) {
+          var idx = null;
+          if (e.key === 'ArrowRight') idx = (i + 1) % tabs.length;
+          else if (e.key === 'ArrowLeft') idx = (i - 1 + tabs.length) % tabs.length;
+          if (idx !== null) {
+            e.preventDefault();
+            tabs[idx].focus();
+            selectTab(tabs[idx]);
+          }
+        });
+      });
+    })();
+  </script>
 
 </body>
 
